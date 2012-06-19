@@ -1,10 +1,14 @@
 
 /*
+ * French
+ */
+
+/*
  * GET home page.
  */
 
 exports.index = function(req, res){
-  res.render('content/index', { title: 'Nvie' })
+  res.render('content/fr/index', { title: 'Nvie'})
 };
 
 /*
@@ -12,5 +16,27 @@ exports.index = function(req, res){
  */
 
 exports.contact = function(req, res){
-  res.render('content/contact', { title: 'contact' })
+  res.render('content/fr/contact', { title: 'Contact' })
 };
+
+/*
+ * GET about page.
+ */
+
+exports.about = function(req, res){
+  res.render('content/fr/about', { title: 'About'})
+};
+
+/*
+ * GET cv page.
+ */
+
+exports.cv = function(req, res){
+  res.render('content/fr/cv', { title: 'CV' })
+};
+
+
+/*
+ * Todo English
+ */
+

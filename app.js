@@ -28,17 +28,14 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-// Routes
 
+// Routes
 app.get('/', routes.index);
 app.get('/contact', routes.contact);
+app.get('/about', routes.about);
+app.get('/cv', routes.cv);
 
-app.get('/about', function(req,res){
-    res.render('content/about',{
-        title: 'About' 
-    });
 
-});
 
 app.listen(3001, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
