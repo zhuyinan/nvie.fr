@@ -34,6 +34,8 @@ app.get('/', routes.index);
 app.get('/contact', routes.contact);
 app.get('/about', routes.about);
 app.get('/cv', routes.cv);
+app.get('/views', routes.contentFr);
+
 
 
 

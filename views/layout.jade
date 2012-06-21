@@ -1,13 +1,8 @@
 !!! 5
 html(lang='en')
-head
-title= title
-link(rel='stylesheet', href='/css/style.css')
-link(rel='stylesheet', href='/css/bootstrap.min.css')
-script(src='/javascripts/jquery-1.7.2.min.js')
-script(src='/javascripts/bootstrap.min.js')
-body 
-  div.navbar.navbar-fixed-top
-    != partial('navigation.jade') 
-  != body
-
+  include includes/head
+  body 
+    div.navbar.navbar-fixed-top
+      //- != partial('navigation.jade') 
+      include navigation
+    include content/fr/index.html

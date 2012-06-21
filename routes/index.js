@@ -4,6 +4,14 @@
  */
 
 /*
+ * GET fr content
+ */
+exports.contentFr = function(req, res){
+  res.render('content/fr', { title: 'Nvie'})
+};
+
+
+/*
  * GET home page.
  */
 
