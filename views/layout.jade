@@ -4,5 +4,6 @@ html(lang='en')
   body 
     div.navbar.navbar-fixed-top
       //- != partial('navigation.jade') 
-      include navigation
-    include content/fr/index.html
+      include includes/navigation
+    div.container#content
+      //- include ../public/content/about.html
