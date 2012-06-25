@@ -5,7 +5,7 @@
 
 var express = require('express')
   , routes = require('./routes');
-
+var connect = require('connect');
 var app = module.exports = express.createServer();
 
 // Configuration
@@ -18,6 +18,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.use(connect().use(connect.favicon()));
 });
 
 app.configure('development', function(){
