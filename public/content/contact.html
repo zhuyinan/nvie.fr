@@ -1,9 +1,10 @@
 <h1>contact</h1>
-<form method="post" action="/">
-    <input type="text" name="user[nom]" />
-    <input type="text" name="user[prenom]" />
-    <input type="text" name="user[email]" />
-    <input type="text" name="user[message]" />
-    <input type="submit" value="Submit" />    
+<form class="well" method="post" action="/">
+    <label>Nom:</label> <input type="text" name="user[nom]" />
+    <label>Pr&eacute;nom:</label><input type="text" name="user[prenom]" />
+    <label>E-mail:</label><input type="text" name="user[email]" />
+    <label>Titre</label><input type="text" name="msg[title]" />
+    <label>Message</label><input type="textarea" name="msg[body]" />
+    <label></label><input class="btn btn-primary" type="submit" value="Submit" />    
 </form>
 
