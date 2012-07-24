@@ -1,10 +1,22 @@
-<h1>contact</h1>
-<form class="well" method="post" action="/">
-    <label>Nom:</label> <input type="text" name="user[nom]" />
-    <label>Pr&eacute;nom:</label><input type="text" name="user[prenom]" />
-    <label>E-mail:</label><input type="text" name="user[email]" />
-    <label>Titre</label><input type="text" name="msg[title]" />
-    <label>Message</label><input type="textarea" name="msg[body]" />
-    <label></label><input class="btn btn-primary" type="submit" value="Submit" />    
+<div class="page-header">
+<h1>Contact</h1>
+</div>
+<form class="well" method="post" onsubmit="return validate_form(this);"  action="/">
+    <div id="nom" class="control-group">
+        <label>Nom:</label> <input id="nom" type="text" name="user[nom]" />
+    </div>
+    <div id="prenom" class="control-group">
+        <label>Pr&eacute;nom:</label><input id="prenom" type="text" name="user[prenom]" />
+    </div>
+    <div id="email" class="control-group">
+        <label>E-mail:</label><input type="text" id="email" name="user[email]" />
+    </div>
+    <div id="title" class="control-group">
+        <label>Titre</label><input id="title" type="text" name="msg[title]" />
+    </div>
+    <div id="message" class="control-group">
+        <label>Message</label><textarea id="message" type="textarea" name="msg[body]" ></textarea>
+    </div>
+    <label></label><input class="btn btn-primary" type="submit" value="Envoyer" />    
 </form>
 
