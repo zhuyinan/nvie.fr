@@ -2,7 +2,7 @@
 (function(){
     var content = document.getElementById('content');
     var host = "http://" + (window.location.host)+ "/";
-    var content = "content/";
+    var contentUrl = "content/";
     var lang ="";
     
     //AJAX
@@ -25,8 +25,7 @@
         xhr.onreadystatechange = function(){
             if(xhr.readyState == 4){
                 if(xhr.status == 200){
-                    var result = xhr.responseText;
-                    callback(result);
+                    callback(xhr.responseText);
                 }
             }
         }
@@ -34,9 +33,9 @@
     }
 
     function getContent(page,callback){
-        url = host + content + page  + '.html';
+        url = host + contentUrl + page  + '.html';
         sendRequest(url,function(result){
-             document.getElementById("content").innerHTML= result;
+             content.innerHTML = result;
              if(typeof callback === 'function')
                 callback();
         });
@@ -45,6 +44,7 @@
     function loadPage(){
         //get page name according to anchor link 
         page = window.location.hash.substr(2);
+            
         switch (page) {
             case "":
                 page = "home";
@@ -64,19 +64,60 @@
             case "contact":
                 getContent(page);
                 break;
+            case "success":
+                getContent(page);
+                break;
+
             default:
-                getContent("error");
+                getContent("404");
                 break;
         }
     }
     
     //load page if everything is OK
-    if(getHttpRequest() !== null && "onhashchange" in window ){
+    if(getHttpRequest() !== null && "onhashchange" in window && window.addEventListener){
         window.onhashchange=loadPage;
         loadPage();
     }else{
         getContent("update");
     }
     
+    
 
 })();
+
+//validation for form
+function validate_email(field) {
+    with (field) {
+        apos=value.indexOf("@")
+            dotpos=value.lastIndexOf(".")
+            if (apos<1||dotpos-apos<2) {
+                document.getElementById("email").className = "control-group error";    
+                return false}
+            else {return true}
+    }
+}
+
+function validate_required(field) {
+    with (field) {  
+        if(value == ""){
+            document.getElementById(field.id).className = "control-group error";    
+            return false;}
+        else{
+            return true;
+        } 
+    }
+
+}
+
+function validate_form(thisform)
+{
+    with (thisform)
+    {
+        if (validate_required(nom) == false){nom.focus(); return false}
+        if (validate_required(prenom) == false){prenom.focus(); return false}
+        if (validate_email(email) == false) {email.focus(); return false}
+        if (validate_required(title) == false){title.focus(); return false}
+        if (validate_required(message) == false){message.focus(); return false}
+    }
+}

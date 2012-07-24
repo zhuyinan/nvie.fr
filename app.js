@@ -1,6 +1,6 @@
-
 /**
- * Module dependencies.
+ *  * Module dependencies.
+ *  
  */
 
 var express = require('express')
@@ -36,29 +36,6 @@ app.configure('production', function(){
     app.use(express.errorHandler());
 });
 
-//Error Handle
-function NotFound(msg){
-    this.name = 'TestNotFound';
-    Error.call(this, msg);
-    Error.captureStackTrace(this, arguments.callee);
-}
-
-NotFound.prototype.__proto__ = Error.prototype;
-
-app.get('/404', function(req, res){
-    throw new NotFound;
-});
-
-app.get('/500', function(req, res){
-    throw new Error('keyboard cat!');
-});
-app.error(function(err, req, res, next){
-    if (err instanceof NotFound) {
-        res.render('404.jade');
-    } else {
-        next(err);
-    }
-});
 
 // Routes
 app.get('/', routes.index);
@@ -125,10 +102,35 @@ text: 'Hello to myself!',
             //transport.close(); // close the connection pool
         });
     }
-    res.redirect('/#/about');
+    res.redirect('/#/success');
+});
+
+//Error Handle
+function NotFound(msg){
+    this.name = 'TestNotFound';
+    Error.call(this, msg);
+    Error.captureStackTrace(this, arguments.callee);
+}
+
+NotFound.prototype.__proto__ = Error.prototype;
+
+app.get('/404', function(req, res){
+    throw new NotFound;
+});
+
+app.get('/500', function(req, res){
+    throw new Error('keyboard cat!');
+});
+app.error(function(err, req, res, next){
+    if (err instanceof NotFound) {
+        res.render('404.jade');
+    } else {
+        next(err);
+    }
 });
 
 
 app.listen(3001, function(){
     console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
+
