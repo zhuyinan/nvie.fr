@@ -1,22 +1,47 @@
 <div class="page-header">
-<h1>Contact</h1>
+    <h1>Contact Moi<small> Si vous avez des questions ou m'int&eacute;ressez ^0^</small></h1>
 </div>
-<form class="well" method="post" onsubmit="return validate_form(this);"  action="/">
-    <div id="nom" class="control-group">
-        <label>Nom:</label> <input id="nom" type="text" name="user[nom]" />
+<div class="row">
+    <div class="span8 offset2 well">
+        <form class="form-horizontal" method="post" onsubmit="return validate_form(this);"  action="/">
+            <fieldset>
+                <legend>Envoyez moi un message</legend>
+                <div id="email" class="control-group">
+                    <label class="control-label" for="input03">E-mail:</label>
+                    <div class="controls"> 
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-envelope"></i></span><input type="text" id="email" name="user[email]" />
+                        </div>
+                    </div>
+                </div>
+                <div id="title" class="control-group">
+                    <label class="control-label" for="input04">Titre:</label>
+                    <div class="controls"> 
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-flag"></i></span><input id="title" type="text" name="msg[title]" />
+                        </div>
+                    </div>
+                </div>
+                <div id="message" class="control-group">
+                    <label class="control-label" for="input05">Message</label>
+                    <div class="controls"> 
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-comment"></i></span><textarea id="message" type="textarea" name="msg[body]" ></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <input class="btn btn-primary" type="submit" value="Envoyer" />    
+                </div>
+            </fieldset>
+        </form>
     </div>
-    <div id="prenom" class="control-group">
-        <label>Pr&eacute;nom:</label><input id="prenom" type="text" name="user[prenom]" />
+</div>
+<div class="row">
+    <div class="span8 offset2 well">
+        <fieldset>
+            <legend>Ou aussi par t&eacute;l&eacute;phone</legend>
+            <p><i class="icon-bell"></i> (+33) 06 01 37 10 45</p>
+        </fieldset>
     </div>
-    <div id="email" class="control-group">
-        <label>E-mail:</label><input type="text" id="email" name="user[email]" />
-    </div>
-    <div id="title" class="control-group">
-        <label>Titre</label><input id="title" type="text" name="msg[title]" />
-    </div>
-    <div id="message" class="control-group">
-        <label>Message</label><textarea id="message" type="textarea" name="msg[body]" ></textarea>
-    </div>
-    <label></label><input class="btn btn-primary" type="submit" value="Envoyer" />    
-</form>
-
+</div>

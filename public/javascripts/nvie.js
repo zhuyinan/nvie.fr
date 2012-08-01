@@ -34,6 +34,7 @@
 
     function getContent(page,callback){
         url = host + contentUrl + page  + '.html';
+        document.title = 'Nvie-' + page.toUpperCase();
         sendRequest(url,function(result){
              content.innerHTML = result;
              if(typeof callback === 'function')
@@ -41,10 +42,21 @@
         });
     }
 
+    function acitveNav(page){
+        var navlist = document.getElementById("nav").children; 
+        for(var i=0; i<navlist.length;i++){
+            if( navlist[i].childNodes.length > 0 && (navlist[i].firstChild.innerHTML).toLowerCase() ==  page.toLowerCase()){ 
+                navlist[i].className = "active";
+        }else{
+                navlist[i].className = navlist[i].className.replace( /(?:^|\s)active(?!\S)/ , '');
+        }
+    }
+    }
+
     function loadPage(){
         //get page name according to anchor link 
         page = window.location.hash.substr(2);
-            
+        acitveNav(page);
         switch (page) {
             case "":
                 page = "home";
@@ -94,7 +106,10 @@ function validate_email(field) {
             if (apos<1||dotpos-apos<2) {
                 document.getElementById("email").className = "control-group error";    
                 return false}
-            else {return true}
+            else {
+                document.getElementById("email").className = document.getElementById("email").className.replace( /(?:^|\s)error(?!\S)/ , ' success');    
+                return true
+            }
     }
 }
 
@@ -104,6 +119,7 @@ function validate_required(field) {
             document.getElementById(field.id).className = "control-group error";    
             return false;}
         else{
+            document.getElementById(field.id).className = document.getElementById(field.id).className.replace( /(?:^|\s)error(?!\S)/ , ' success');
             return true;
         } 
     }
@@ -114,8 +130,6 @@ function validate_form(thisform)
 {
     with (thisform)
     {
-        if (validate_required(nom) == false){nom.focus(); return false}
-        if (validate_required(prenom) == false){prenom.focus(); return false}
         if (validate_email(email) == false) {email.focus(); return false}
         if (validate_required(title) == false){title.focus(); return false}
         if (validate_required(message) == false){message.focus(); return false}

@@ -43,9 +43,10 @@ app.get('/', routes.index);
 //app.get('/about', routes.about);
 //app.get('/cv', routes.cv);
 app.post('/', function(req, res){
-    console.log(req.body.user);
-    console.log(req.body.user["name"]);
-    var name = req.body.user["name"];
+    console.log(req.body);
+    var email = req.body.user["email"];
+    var title = req.body.msg["title"];
+    var msg = req.body.msg["body"];
     /**
      * Configuration for SMTP sending mail
      */
@@ -69,10 +70,10 @@ user: "user@nvie.fr",
 from: 'Postmaster <postmaster@nvie.fr>',
 
       // Comma separated list of recipients
-      to: '"ZHU Yinan" <zhuyinan1988@gmail.com>',
+      to: '"ZHU Yinan" <yinan.zhu@nvie.fr>',
 
       // Subject of the message
-      subject: 'Nodemailer is unicode friendly .', //
+      subject: title, //
 
       headers: {
           'X-Laziness-level': 1000
@@ -82,14 +83,13 @@ from: 'Postmaster <postmaster@nvie.fr>',
 text: 'Hello to myself!',
 
       // HTML body
-      html:'<p><b>Hello</b> to myself <img src="cid:note@node"/></p>'+
-          '<p>Here\'s a nyan cat for you as an embedded attachment:<br/></p>',
+      html:'<p>An email from: <b>'+ email+ '</b> to you </p>'+
+          '<p>Message:'+ msg +'<br/></p>',
 
 
     };
 
     console.log('Sending Mail');
-    if(name==2){
         transport.sendMail(message, function(error){
             if(error){
                 console.log('Error occured');
@@ -101,7 +101,7 @@ text: 'Hello to myself!',
             // if you don't want to use this transport object anymore, uncomment following line
             //transport.close(); // close the connection pool
         });
-    }
+    
     res.redirect('/#/success');
 });
 
