@@ -2,9 +2,15 @@
 //- script $('.dropdown-toggle').dropdown()
 div.navbar-inner
   div.container
+    button.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
     a.brand(href="#/") Nvie
-    div.nav-collapse
+    div.nav-collapse.collapse
       ul.nav#nav
+        li
+          a(href="#/") Home
         li
           a(href="#/cv") CV
         li

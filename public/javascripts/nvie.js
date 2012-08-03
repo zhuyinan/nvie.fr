@@ -56,7 +56,6 @@
     function loadPage(){
         //get page name according to anchor link 
         page = window.location.hash.substr(2);
-        acitveNav(page);
         switch (page) {
             case "":
                 page = "home";
@@ -84,6 +83,7 @@
                 getContent("404");
                 break;
         }
+        acitveNav(page);
     }
     
     //load page if everything is OK
