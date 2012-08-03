@@ -2,7 +2,7 @@
 (function(){
     var content = document.getElementById('content');
     var host = "http://" + (window.location.host)+ "/";
-    var content = "content/";
+    var contentUrl = "content/";
     var lang ="";
     
     //AJAX
@@ -25,8 +25,7 @@
         xhr.onreadystatechange = function(){
             if(xhr.readyState == 4){
                 if(xhr.status == 200){
-                    var result = xhr.responseText;
-                    callback(result);
+                    callback(xhr.responseText);
                 }
             }
         }
@@ -34,12 +33,24 @@
     }
 
     function getContent(page,callback){
-        url = host + content + page  + '.html';
+        url = host + contentUrl + page  + '.html';
+        document.title = 'Nvie-' + page.toUpperCase();
         sendRequest(url,function(result){
-             document.getElementById("content").innerHTML= result;
+             content.innerHTML = result;
              if(typeof callback === 'function')
                 callback();
         });
+    }
+
+    function acitveNav(page){
+        var navlist = document.getElementById("nav").children; 
+        for(var i=0; i<navlist.length;i++){
+            if( navlist[i].childNodes.length > 0 && (navlist[i].firstChild.innerHTML).toLowerCase() ==  page.toLowerCase()){ 
+                navlist[i].className = "active";
+        }else{
+                navlist[i].className = navlist[i].className.replace( /(?:^|\s)active(?!\S)/ , '');
+        }
+    }
     }
 
     function loadPage(){
@@ -64,19 +75,63 @@
             case "contact":
                 getContent(page);
                 break;
+            case "success":
+                getContent(page);
+                break;
+
             default:
-                getContent("error");
+                getContent("404");
                 break;
         }
+        acitveNav(page);
     }
     
     //load page if everything is OK
-    if(getHttpRequest() !== null && "onhashchange" in window ){
+    if(getHttpRequest() !== null && "onhashchange" in window && window.addEventListener){
         window.onhashchange=loadPage;
         loadPage();
     }else{
         getContent("update");
     }
     
+    
 
 })();
+
+//validation for form
+function validate_email(field) {
+    with (field) {
+        apos=value.indexOf("@")
+            dotpos=value.lastIndexOf(".")
+            if (apos<1||dotpos-apos<2) {
+                document.getElementById("email").className = "control-group error";    
+                return false}
+            else {
+                document.getElementById("email").className = document.getElementById("email").className.replace( /(?:^|\s)error(?!\S)/ , ' success');    
+                return true
+            }
+    }
+}
+
+function validate_required(field) {
+    with (field) {  
+        if(value == ""){
+            document.getElementById(field.id).className = "control-group error";    
+            return false;}
+        else{
+            document.getElementById(field.id).className = document.getElementById(field.id).className.replace( /(?:^|\s)error(?!\S)/ , ' success');
+            return true;
+        } 
+    }
+
+}
+
+function validate_form(thisform)
+{
+    with (thisform)
+    {
+        if (validate_email(email) == false) {email.focus(); return false}
+        if (validate_required(title) == false){title.focus(); return false}
+        if (validate_required(message) == false){message.focus(); return false}
+    }
+}
