@@ -53,11 +53,11 @@ app.post('/', function(req, res){
     // Create a SMTP transport object
     var transport = nodemailer.createTransport("SMTP", {
         //  service: 'Gmail', // use well known service
-host: "smtp.nvie.fr",
+host: "ns0.ovh.net",
         port:25,
         auth: {
-user: "user@nvie.fr",
-        pass: "passward"
+user: "postmaster@nvie.fr",
+        pass: "muFB5QCg"
         }
     });
 

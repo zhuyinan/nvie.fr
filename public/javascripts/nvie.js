@@ -87,14 +87,15 @@
     }
     
     //load page if everything is OK
-    if(getHttpRequest() !== null && "onhashchange" in window && window.addEventListener){
+    if(getHttpRequest() !== null && "onhashchange" in window && (document.documentMode === undefined || document.documentMode > 7 )){
         window.onhashchange=loadPage;
         loadPage();
     }else{
         getContent("update");
     }
     
-    
+   //fix bug of IE8 don't understant html5 tag 
+    document.createElement("footer");
 
 })();
 
